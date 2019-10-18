@@ -18,9 +18,25 @@ for name_1 in names_1:
 
 # First Pass at optimization
 # use a list comprehension runs in 3.902
-duplicates = [
-    name_2 for name_1 in names_1 for name_2 in names_2 if name_1 == name_2]
+'''duplicates = [
+    name_2 for name_1 in names_1 for name_2 in names_2 if name_1 == name_2]'''
 
+# Even more optimized
+# use 2 separate for loops runs in 0.013 secs in O(n) time
+duplicates = []  # list that stores duplicates
+names_dic = {}  # dictionary that holds names in names_1 as values to name keys
+
+# for every name in names_1
+# take each name and assign it as a value to the name key in names_dic
+for name in names_1:
+    names_dic[name] = 'name in name_1'
+
+# for every name in names_2
+for name in names_2:
+    # if name can be found as a value in names_dic
+    if name in names_dic:
+        # append the name to the duplicates list
+        duplicates.append(name)
 
 end_time = time.time()
 print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
